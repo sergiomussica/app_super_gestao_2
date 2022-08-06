@@ -1,5 +1,16 @@
 25. Rotas (Routes) - Introdução
+comandos
+composer create-project --prefer-dist laravel/laravel app_super_gestao_2 "7.0.0"
 api.php->registrar rotas das apis
 channels.php->definição de rotas browquesting
 console.php->comandos persolizados para o artisan
 web->rotas internas da aplicação
+
+27. Controllers
+rota fica associada a um controlador para uma determinada acção
+
+routes->controllers->views
+
+Aula 30. Criação de views
+Criação de controllers contacto,principal e sobre nos
+Conectar os controllers às views
