@@ -1,0 +1,5 @@
+25. Rotas (Routes) - Introdução
+api.php->registrar rotas das apis
+channels.php->definição de rotas browquesting
+console.php->comandos persolizados para o artisan
+web->rotas internas da aplicação
