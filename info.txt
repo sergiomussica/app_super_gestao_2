@@ -14,3 +14,8 @@ routes->controllers->views
 Aula 30. Criação de views
 Criação de controllers contacto,principal e sobre nos
 Conectar os controllers às views
+
+Aula 30.31,32 Criação de views, envio de parâmentros nas rota via função de callback
+Envio de parametros na rota
+importa a sequencia de parâmetros,caso o parâmetro seja opcional adicionar ?
+Caso seja necessário padronizar um parâmetro no sentido direita para esquerda, informar mensagem por padrão , caso contrário o Laravel ficará perdido

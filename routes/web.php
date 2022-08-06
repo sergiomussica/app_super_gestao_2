@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\ContactoController;
+use App\Http\Controllers\PrincipalController;
+use App\Http\Controllers\SobreNosController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,10 +16,22 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+Route::get('/', 'PrincipalController@principal');
+Route::get('/sobre-nos', 'SobreNosController@sobrenos');
+Route::get('/contacto','ContactoController@contacto');
+
+Route::get('/contacto/{nome}/{categoria?}/', function (string $nome,string $categoria = 'categoria não informada' ) {
+    echo "Estamos aqui: $nome - $categoria";
+}
+);
+
+//nome
+
+/*
 Route::get('/', function () {
     return view('welcome');
 });
 
-Rout::('/', function(){
-    retur
-})
+*/

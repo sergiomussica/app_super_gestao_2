@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class PrincipalController extends Controller
 {
     //
-    public function contacto(){
+    public function principal(){
         return view('site.principal');
     }
 }
