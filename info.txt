@@ -19,3 +19,6 @@ Aula 30.31,32 Criação de views, envio de parâmentros nas rota via função de
 Envio de parametros na rota
 importa a sequencia de parâmetros,caso o parâmetro seja opcional adicionar ?
 Caso seja necessário padronizar um parâmetro no sentido direita para esquerda, informar mensagem por padrão , caso contrário o Laravel ficará perdido
+
+Aula 34
+Uso de espressões regulares para filtrar os tipo parametros na rota

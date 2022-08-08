@@ -22,10 +22,15 @@ Route::get('/', 'PrincipalController@principal');
 Route::get('/sobre-nos', 'SobreNosController@sobrenos');
 Route::get('/contacto','ContactoController@contacto');
 
-Route::get('/contacto/{nome}/{categoria?}/', function (string $nome,string $categoria = 'categoria não informada' ) {
-    echo "Estamos aqui: $nome - $categoria";
-}
-);
+Route::get(
+    '/contacto/{nome}/{categoria_id}/',
+    function (
+    string $nome = 'Desconhecido',
+    int $categoria = 1 
+    ) {
+    echo "Estamos aqui: $nome - $categoria";    
+    }
+)->where('categoria_id','[0-9]+')->where('nome','[A-Za-z]+');
 
 //nome
 
