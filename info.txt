@@ -28,4 +28,7 @@ Criação de Rotas
 Agrupamento de rotas 
 Dar nome a rotas e chamar rotas com base no nome nas views
 
+Aula 38
+Redirecçionamento de rotas com a função redirect e dentro de uma rota
+
 
