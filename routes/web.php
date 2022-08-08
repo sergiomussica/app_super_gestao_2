@@ -29,13 +29,9 @@ Route::prefix('/app')->group( function(){
     Route::get('/produtos',function(){return 'produtos';})->name('app.produtos');
 });
 
-Route::get('/rota1', function(){
-    echo 'Rota 1';
-})->name('site.rota1');
-
-Route::get('/rota2', function(){
-    return redirect()->route('site.rota1');
-})->name('site.rota2');
+Route::fallback(function(){
+    echo 'A rota acessada não existe. Clique a qui para ir para página incial';
+});
 
 //Route::redirect('/rota2','/rota1');
 
