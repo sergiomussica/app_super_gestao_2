@@ -22,3 +22,10 @@ Caso seja necessário padronizar um parâmetro no sentido direita para esquerda,
 
 Aula 34
 Uso de espressões regulares para filtrar os tipo parametros na rota
+
+Aula 35,36,37
+Criação de Rotas
+Agrupamento de rotas 
+Dar nome a rotas e chamar rotas com base no nome nas views
+
+
