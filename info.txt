@@ -40,3 +40,11 @@ Encaminhamento de parâmentros  do controlador para vizualização
 
 Metódo with, compact e array associativo
 
+Aula 42.43
+Incluir comentários e blocos puros php
+{{----}}
+@php
+@endphp
+{{}} == <?= ?>
+
+
