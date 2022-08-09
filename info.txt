@@ -34,3 +34,9 @@ Redirecçionamento de rotas com a função redirect e dentro de uma rota
 Aula 39 
 Rota de Fallback
 
+Aula 40,41
+Encaminhamento de parâmetros da rota para o controlador
+Encaminhamento de parâmentros  do controlador para vizualização
+
+Metódo with, compact e array associativo
+

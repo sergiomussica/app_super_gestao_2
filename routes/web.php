@@ -3,6 +3,7 @@
 use App\Http\Controllers\ContactoController;
 use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobreNosController;
+use App\Http\Controllers\TesteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,6 +29,8 @@ Route::prefix('/app')->group( function(){
     Route::get('/fornecedores', function(){return 'fornecedores';})->name('app.fornecedores');
     Route::get('/produtos',function(){return 'produtos';})->name('app.produtos');
 });
+
+Route::get('/teste/{p1}/{p2}/','TesteController@teste')->name('site.contacto');
 
 Route::fallback(function(){
     echo 'A rota acessada não existe. Clique a qui para ir para página incial';
