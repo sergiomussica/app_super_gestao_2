@@ -89,6 +89,20 @@ codicao ? se verdade : se falso; operador ternario ex:isset($fornecedores[1]['cn
 @endforelse
 ------------------------------
 
+Aula 56,57
+@{{}}->o blade não interpreta o código
+
+{{$loop->iteration pode}} disponível apenas para foreach e forelse
+{{$loop->first}} retorna se é a primeira iteração do ciclo de repetição
+{{$loop->last}} indica se é a última iteração
+
+{{$loop->count}} retorna o número de registros
+
+
+Aula 61,62,63,64,65
+Template com @extends, @section, e @yield
+include de views usando @include
+
 
 
 
