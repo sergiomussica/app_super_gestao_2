@@ -99,9 +99,275 @@ Aula 56,57
 {{$loop->count}} retorna o número de registros
 
 
-Aula 61,62,63,64,65
+Aula 61,62,63,64,65,66,67,68,69
 Template com @extends, @section, e @yield
 include de views usando @include
+@component 
+$slot
+
+Aula 70,78,79,80,81,82,83,84,85,86,87,88
+php artisan make:model SiteContacto -m criar migration automaticamente
+php artisan make: model Fornecedor
+php artisan make: migration create_fornecedores_table
+public function up(){
+    Schema::create('fornecedores',function (Blueprint $table)){
+        $table->id();
+        $table->string('nome',100);
+        $table->text('descricao')->nullable();
+        $table->integer('peso');
+        $table->float('preco_venda',8,2)-default(0.01);pode ter até 8 digitos, dois são para fracção
+        $table
+
+    };
+}
+
+php artisan make: migration alter_fornecedores_novas_colunas
+public function up(){
+    Schema::table('fornecedores',function (Blueprint $table)){
+
+
+    };
+}
+public function down(){
+     Schema::table('fornecedores',function (Blueprint $table)){
+        $table->dropColumn(['','',''])
+    };
+}
+
+php artisan migrate
+php artisan migrate:rollback
+php artisan migrate:rollback --step=2
+
+Migration - Adicionando chaves estrangeira (Relacionamento um para um)
+public function up(){
+    Schema::table('produto_detalhes',function (Blueprint $table)){
+
+        $table->id();
+        $table->unsignedBigInteger('produto_id');
+
+        $table->foreign('produto_id')->references('id')->on('produtos');
+        $table->unique('produto_id');
+    };
+}
+
+Migration - Adicionando chaves estrangeira (Relacionamento um para muitos)
+
+public function up(){
+    Schema::crate('unidades',function (Blueprint $table)){
+
+        $table->id();
+        $table->string('unidades',5);
+       
+    };
+
+    //adicionar o Relacionamento com a tabela produtos
+     Schema::table('produtos',function (Blueprint $table)){
+
+        $table->unsignedBigInteger('unidade_id');
+        $table->foreign('unidades_id')->references('id')->on('unidades');       
+    };
+
+     Schema::table('produto_detalhes',function (Blueprint $table)){
+
+        $table->unsignedBigInteger('unidade_id');
+        $table->foreign('unidades_id')->references('id')->on('unidades');       
+    };
+}
+
+public function down(){
+
+    //remover o Relacionamento com a tabela produto_detalhes
+     Schema::table('fornecedores',function (Blueprint $table)){
+
+        //remover aFK
+        $table->dropForeign('produtos_detalhes_unidade_id_foreign');//[tabela]
+        //remover a coluna unidade_id
+        $table->dropColumn('unidade_id')
+    };
+
+    //remover o Relacionamento com a tabela produtos
+      Schema::table('produtos',function (Blueprint $table)){
+
+        //remover aFK
+        $table->dropForeign('produtos_unidade_id_foreign');//[tabela]
+        //remover a coluna unidade_id
+        $table->dropColumn('unidade_id')
+    };
+
+    Schema::dropIfExists('unidades');
+
+}
+Migration - Adicionando chaves estrangeira (Relacionamento muitos para muitos)
+uma tabela auxiliar entre duas tabelas que contém chaves estrangeiras de duas tabelas
+
+Migration - Modification After -> ordenação das colunas
+public function up(){
+    Schema::table('fornecedores',function (Blueprint $table)){
+        $table->string('site',150)->after('nome');
+    };
+}
+
+Migration Status Reset Refresh Fresh
+php artisan migrate:status informa migration pendentes e executadas e o batch
+php artisan migrate:reset faz um roolback das migration
+php artisan migrate:refresh reverter todas migrations e, em seguida executar todas migrations
+php artisan migrate:fresh faz o drop de todos os obejctos da base de dados + o migrate para recriar os objectos
+
+Aulas 90 Tinker
+php artisan tinker
+
+//inserção de registros
+$contacto = new \App\SiteContacto();
+$contacto->nome = 'Jorge';
+$contacto->telefone = '258 876804015';
+print_r($contacto->getAttributes());//imprime o objecto prenchido;
+$contacto->save();
+
+//Ajustando nome da tabela para um correcto ORM
+Nome do modelo SiteContactoTeste
+Nome da tabela Site_contacto_testes
+
+Model Fornecedor
+class Fornecedor extends Model{
+    protected $table = 'fornecedores';
+}
+
+
+//inserindo registros com create e Fillable
+    ::chamar método estático
+    new chamar método não estático
+
+    php artisan tinker
+    \App\Fornecedor::create(['nome'=>'Fornecedor ABC', 'site'=>'fonecedor.com.br']);
+    //causa erro, antes de usar o método create, é necessário adicionar os campos ao Fillable
+
+    class Fornecedor extends Model{
+        protected $table = 'fornecedores';
+        protected $fillable = ['nome','site'];
+    }
+
+// seleccionando registro coM all()
+use \App\Fornecedor;
+$fornecedores = Fornecedor::all();
+print_r($fornecedores->toArray());
+
+foreach($fornecedores as $f){echo $f->nome; echo ' - ';}
+
+//seleccionar com find()
+$fornecedores2 = Fornecedor::find(2);
+$fornecedores2 = Fornecedor::find([2,5,6]);
+
+//seleccionar com where
+$fornecedores = Fornecedor::where('nome_coluna','operador_comparacao','valor');
+$fornecedores = Fornecedor::where('id','>','1')->get();
+//96
+
+Aulas 106,107 Collection first, last e reverse
+$contactos = Sitecontacto::where('id', '>', 3)->get()-first();
+$contactos = Sitecontacto::where('id', '>', 3)->get()-last();
+$contactos = Sitecontacto::where('id', '>', 3)->get()-reverse();
+ 
+Aulas 108 Collection toArray() e toJason()
+
+Aulas 109 Collection pluck
+$contactos = Sitecontacto::all()->pluck('email'); //devolve apenas deteminados campos da colecção de dados
+
+114
+$contacto->delete();
+SiteContacto::where('id',7)->delete();
+SiteContacto::destroy(5);
+
+115 softDeletes
+    na model use Illuminate\Database\SoftDeletes;
+
+    class Fornecedor extends Model{
+        use SoftDeletes
+    }
+
+    na migration
+    public function up(){
+    Schema::create('fornecedores',function (Blueprint $table)){
+        $table->softDelete();
+    };
+    $fornecedor->delete(); usa softDelete
+    $fornecedor->forceDelete();
+
+
+117,118 Seeder
+php artisan make:seeder FornecedorSeeder
+
+        //FornecedorSeeder
+        public void run(){
+            $fornecedor = new Fornecedor();
+            $fornecedor->nome= 'shlgs';
+            $fornecedor->save();
+
+            //apenas funciona se os parâmentros estiverem definidos no fillable
+            Fornecedor::create([
+                'nome' => 'Fornecedor 200'
+            ]);
+
+            //insert
+            DB::table('fornecedores')->insert([
+                'nome' => 'Fornecedor 200'
+            ]);
+
+        }
+
+        //DatabaseSeeder
+        public void run(){
+            $this->call(FornecedorSeeder::class);
+        }
+php artisan db:seed
+php artisan db:seed --class=FornecedorSeeder //para executar apenas uma classe seeder
+
+119 Factories
+github.com/fzaninotto/faker documentation
+php artisan make:factory SiteContactoFactory --model=SiteContacto
+
+120
+$request->all();//recurpe todo conteudo
+$request->input('nome');//recupera o parâmetro
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
