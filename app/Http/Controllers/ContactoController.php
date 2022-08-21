@@ -26,8 +26,14 @@ class ContactoController extends Controller
 
         //$contacto->fill($request->all());
         //$contacto->save();
+
+        $motivo_contatos = [
+            '1' => 'Dúuvida',
+            '2' => 'Elogio',
+            '3' => 'Reclamação',
+        ];
     
-        return view('site.contacto',['titulo'=>'Contacto']);
+        return view('site.contacto',['titulo' => 'Contacto', 'motivo_contatos' => $motivo_contatos ]);
     }
 
     public function salvar(Request $request){
