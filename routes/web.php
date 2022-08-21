@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'PrincipalController@principal')->name('site.index');
 Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
 Route::get('/contacto', 'ContactoController@contacto')->name('site.contacto');
-Route::post('/contacto', 'ContactoController@contacto')->name('site.contacto');
+Route::post('/contacto', 'ContactoController@salvar')->name('site.contacto');
 Route::get('/login', function(){return 'Login';})->name('site.login');
 
 Route::prefix('/app')->group(function() {

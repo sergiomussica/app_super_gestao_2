@@ -19,8 +19,8 @@ class ContactoController extends Controller
 
         //print_r($contacto->getAttributes());
 
-        $contacto = new SiteContacto();
-        $contacto->create($request->all());
+        //$contacto = new SiteContacto();
+        //$contacto->create($request->all());
 
 
 
@@ -28,5 +28,17 @@ class ContactoController extends Controller
         //$contacto->save();
     
         return view('site.contacto',['titulo'=>'Contacto']);
+    }
+
+    public function salvar(Request $request){
+        $request->validate([
+            'nome' => 'required',
+            'telefone' => 'required',
+            'email' => 'required',
+            'motivo_contato' => 'required',
+            'mensagem' => 'required',
+
+        ]);
+        //SiteContacto::create($request->all());
     }
 }
