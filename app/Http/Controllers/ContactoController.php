@@ -37,11 +37,12 @@ class ContactoController extends Controller
         $request->validate([
             'nome' => 'required|min:3|max:40',
             'telefone' => 'required',
-            'email' => 'required',
-            'motivo_contato' => 'required',
+            'email' => 'email',
+            'motivo_contatos_id' => 'required',
             'mensagem' => 'required|max:2000',
 
         ]);
-        //SiteContacto::create($request->all());
+        SiteContacto::create($request->all());
+        return redirect()->route('site.index');
     }
 }
