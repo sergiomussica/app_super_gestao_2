@@ -2,10 +2,15 @@
 <form action={{ route('site.contacto') }} method="post">
     @csrf
     <input name="nome" value="{{old('nome')}}" type="text" placeholder="Nome" class="{{ $classe }}">
+    @if ($erros->has('nome'))
+        {{$erros->first('nome')}}
+    @endif
     <br>
     <input name="telefone" value="{{old('telefone')}}" type="text" placeholder="Telefone" class="{{ $classe }}">
+    {{$errors->has('telefone') ? $errors->first('telefone') : ''}}
     <br>
     <input name="email" value="{{old('email')}}" type="text" placeholder="E-mail" class="{{ $classe }}">
+    {{$errors->has('email') ? $errors->first('email') : ''}}
     <br>
   
     <select name="motivo_contatos_id" class="{{ $classe }}">
