@@ -5,6 +5,7 @@ use App\Http\Controllers\PrincipalController;
 use App\Http\Controllers\SobreNosController;
 use App\Http\Controllers\TesteController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\LogAcessoMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +21,13 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('/', 'PrincipalController@principal')->name('site.index');
+
+Route::middleware(LogAcessoMiddleware::class)
+     ->get('/', 'PrincipalController@principal')
+     ->name('site.index');
+    
+     
+
 Route::get('/sobre-nos', 'SobreNosController@sobreNos')->name('site.sobrenos');
 Route::get('/contacto', 'ContactoController@contacto')->name('site.contacto');
 Route::post('/contacto', 'ContactoController@salvar')->name('site.contacto');
