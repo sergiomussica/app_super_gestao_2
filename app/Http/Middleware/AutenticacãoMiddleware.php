@@ -14,15 +14,19 @@ class AutenticacãoMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next,$metodo_autenticacacao,$perfil)
     {
        // return $next($request);
-       if(true){
+       echo $metodo_autenticacacao."<br>";
 
+       if($metodo_autenticacacao == 'padrao'){
+            echo 'Verificar o utilizador e senha no banco de dados.';
        }else{
-        return Response('Acesso Negad ! Rota exige autenticação!!!');
+        echo 'Verificar o utilizador e senha no AD;';
        }
-      
+
+
+       return Response('Acesso Negad ! Rota exige autenticação!!!');
 
     }
 }

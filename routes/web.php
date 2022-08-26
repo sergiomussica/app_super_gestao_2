@@ -29,7 +29,7 @@ Route::get('/contacto', 'ContactoController@contacto')->name('site.contacto');
 Route::post('/contacto', 'ContactoController@salvar')->name('site.contacto');
 Route::get('/login', function(){return 'Login';})->name('site.login');
 
-Route::middleware('autenticacao')->prefix('/app')->group(function() {
+Route::middleware('autenticacao:padrao,visitante,p3,p4')->prefix('/app')->group(function() {
 
     Route::get('/clientes', function(){return 'Clientes';})->name('app.clientes');
     Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
