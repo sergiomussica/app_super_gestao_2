@@ -30,7 +30,7 @@ Route::post('/contacto', 'ContactoController@salvar')->name('site.contacto');
 Route::get('/login', function(){return 'Login';})->name('site.login');
 
 Route::prefix('/app')->group(function() {
-    Route::middleware('log.acesso','autenticacao')
+    Route::middleware('autenticacao')
             ->get('/clientes', function(){return 'Clientes';})
             ->name('app.clientes');
 
