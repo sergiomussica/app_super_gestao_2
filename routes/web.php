@@ -29,11 +29,9 @@ Route::get('/contacto', 'ContactoController@contacto')->name('site.contacto');
 Route::post('/contacto', 'ContactoController@salvar')->name('site.contacto');
 Route::get('/login', function(){return 'Login';})->name('site.login');
 
-Route::prefix('/app')->group(function() {
-    Route::middleware('autenticacao')
-            ->get('/clientes', function(){return 'Clientes';})
-            ->name('app.clientes');
+Route::middleware('autenticacao')->prefix('/app')->group(function() {
 
+    Route::get('/clientes', function(){return 'Clientes';})->name('app.clientes');
     Route::get('/fornecedores', 'FornecedorController@index')->name('app.fornecedores');
     Route::get('/produtos', function(){return 'produtos';})->name('app.produtos');
 });
