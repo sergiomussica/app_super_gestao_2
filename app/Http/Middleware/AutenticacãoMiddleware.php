@@ -3,10 +3,9 @@
 namespace App\Http\Middleware;
 
 use Closure;
-use App\LogAcesso;
+use Facade\FlareClient\Http\Response;
 
-
-class LogAcessoMiddleware
+class AutenticacãoMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,12 +17,12 @@ class LogAcessoMiddleware
     public function handle($request, Closure $next)
     {
        // return $next($request);
-       $ip = $request->server->get('REMOTE_ADDR');
-       $rota = $request->getRequestUri();
-       LogAcesso::create(['log' => "IP $ip requisitou a rota $rota"]);
+       if(true){
 
-       return $next($request);
+       }else{
+        return Response('Acesso Negad ! Rota exige autenticação!!!');
+       }
+      
 
-       //return Response('Chegamos no middleare e finalizamos o próprio');
     }
 }
