@@ -11,7 +11,20 @@ class LoginController extends Controller
         return view('site.login',['titulo' => 'Login']);
     }
 
-    public function autenticar(){
-        
+    public function autenticar(Request $request){
+        $regras =[
+            'usuario' => 'email',
+            'senha' => 'required'  
+        ];
+
+        $feedback = [
+            'usuario.email' => 'O campo utilizador (email) é obrigatório',
+            'senha.required' => 'O campo senha é obrigatório'
+        ];
+
+        $request->validate($regras,$feedback);
+
+        print_r($request->all());
+
     }
 }
