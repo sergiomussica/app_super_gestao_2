@@ -332,6 +332,19 @@ $request->input('nome');//recupera o parâmetro
 161
 developer.mozila.org/
 
+172 Relacionamentos 1x1,1xN e NxN com Eloquente ORM
+Relacionamento 1 para 1
+tabela 1 para 1 tabela_a  tabela_b
+                id          tabela_a_id aplica constrait unique
+
+tabela 1 para N tabela_a  tabela_b
+                id        tabela_a_id
+
+tabela N para N tabela_a  tabela_r                   tabela_b
+                id        tabela_a_id tabela_b_id     id
+
+
+
 
 
 
