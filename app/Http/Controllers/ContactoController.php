@@ -30,7 +30,7 @@ class ContactoController extends Controller
 
         $motivo_contatos = MotivoContato::all();
     
-        return view('site.contacto',['titulo' => 'Contacto', 'motivo_contatos' => $motivo_contatos ]);
+        return view('site.contato',['titulo' => 'Contacto', 'motivo_contatos' => $motivo_contatos ]);
     }
 
     public function salvar(Request $request){
