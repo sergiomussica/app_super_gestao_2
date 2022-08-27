@@ -21,6 +21,8 @@
                     <button type="submit" class="borda-preta">Aceder</button>
                     
                 </form>
+
+                {{isset($erro) && $erro != ''? : ''}}
             </div>
            
         </div>
