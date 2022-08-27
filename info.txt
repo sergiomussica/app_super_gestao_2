@@ -329,6 +329,8 @@ php artisan make:factory SiteContactoFactory --model=SiteContacto
 $request->all();//recurpe todo conteudo
 $request->input('nome');//recupera o parâmetro
 
+161
+developer.mozila.org/
 
 
 
