@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Produto;
+use App\ProdutoDetalhe;
 use App\Unidade;
 use Illuminate\Http\Request;
 
@@ -15,10 +16,26 @@ class ProdutoController extends Controller
      */
     public function index(Request $request)
     {
-
         $produtos = Produto::paginate(10);
 
-        return view('app.produto.index', ['produtos' => $produtos, 'request' => $request->all()]);
+        foreach($produtos as $key => $produto) {
+            //print_r($produto->getAttributes());
+            //echo '<br><br>';
+
+            $produtoDetalhe = ProdutoDetalhe::where('produto_id', $produto->id)->first();
+            //collection ProdutoDetalhe
+            //ProdutoDetalhe
+            if(isset($produtoDetalhe)) {
+                //print_r($produtoDetalhe->getAttributes());
+                
+                $produtos[$key]['comprimento'] = $produtoDetalhe->comprimento;
+                $produtos[$key]['largura'] = $produtoDetalhe->largura;
+                $produtos[$key]['altura'] = $produtoDetalhe->altura;
+            }
+            //echo '<hr>';
+        }
+
+        return view('app.produto.index', ['produtos' => $produtos, 'request' => $request->all() ]);
     }
 
     /**
@@ -44,10 +61,10 @@ class ProdutoController extends Controller
             'nome' => 'required|min:3|max:40',
             'descricao' => 'required|min:3|max:2000',
             'peso' => 'required|integer',
-            'unidade_id' => 'exists:unidades,id',
+            'unidade_id' => 'exists:unidades,id'
         ];
 
-        $feedbacks = [
+        $feedback = [
             'required' => 'O campo :attribute deve ser preenchido',
             'nome.min' => 'O campo nome deve ter no mínimo 3 caracteres',
             'nome.max' => 'O campo nome deve ter no máximo 40 caracteres',
@@ -57,8 +74,8 @@ class ProdutoController extends Controller
             'unidade_id.exists' => 'A unidade de medida informada não existe'
         ];
 
-        $request->validate($regras, $feedbacks);
-
+        $request->validate($regras, $feedback);
+        
         Produto::create($request->all());
         return redirect()->route('produto.index');
     }
